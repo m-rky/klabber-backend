@@ -9,6 +9,6 @@
     "esModuleInterop": true,
     "types": []
   },
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts", "index.js"],
   "exclude": ["node_modules", "./node_modules", "./node_modules/*", "./node_modules/@types/node/index.d.ts"]
 }

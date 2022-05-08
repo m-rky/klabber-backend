@@ -1,6 +1,6 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express, { Application } from 'express';
+import express from 'express';
 import basicAuth from 'express-basic-auth';
 import helmet from 'helmet';
 
@@ -9,10 +9,10 @@ import { routes } from './routes';
 
 dotenv.config();
 
-const app: Application = express();
+const app = express();
 // Cors
 const allowedOrigins = ['http://localhost:3000'];
-const options: cors.CorsOptions = {
+const options = {
   origin: allowedOrigins,
   credentials: true,
 };
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   basicAuth({ users: { admin: process.env.CLIENT_KEY }, unauthorizedResponse: { error: 'Missing Headers' } }),
-  (req: basicAuth.IBasicAuthedRequest, res, next) => {
+  (req, res, next) => {
     next();
   },
 );
@@ -38,5 +38,7 @@ try {
     routes(app);
   });
 } catch (error) {
-  log.error(`Error occurred: ${error.message as string}`);
+  log.error(`Error occurred: ${error.message}`);
 }
+
+module.exports = app;
