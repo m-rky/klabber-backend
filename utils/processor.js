@@ -1,7 +1,7 @@
-import { log } from '../logger';
-import { search } from './search';
-
 const axios = require('axios');
+
+const log = require('../logger');
+const search = require('./search');
 
 export const processQuery = async (query) => {
   log.info('Starting processing...');

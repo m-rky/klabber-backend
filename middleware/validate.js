@@ -1,7 +1,7 @@
-import { log } from '../logger';
-
 const query = require('express-validator');
 const validationResult = require('express-validator');
+
+const log = require('../logger');
 
 export const rules = () => {
   return [

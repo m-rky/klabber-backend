@@ -1,6 +1,6 @@
-import { log } from '../logger';
-
 const axios = require('axios');
+
+const log = require('../logger');
 
 const bodyExtractor = (body) => {
   const arrayOfStrings = body.split(' ');

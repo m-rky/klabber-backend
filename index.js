@@ -1,11 +1,11 @@
-import { log } from './logger';
-import { routes } from './routes';
-
 const cors = require('cors');
 const dotenv = require('dotenv');
 const express = require('express');
 const basicAuth = require('express-basic-auth');
 const helmet = require('helmet');
+
+const log = require('./logger');
+const routes = require('./routes');
 
 dotenv.config();
 

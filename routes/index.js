@@ -1,6 +1,7 @@
-import { log } from '../logger';
-import { rules, validate } from '../middleware/validate';
-import { processQuery } from '../utils/processor';
+const log = require('../logger');
+const rules = require('../middleware/validate');
+const validate = require('../middleware/validate');
+const processQuery = require('../utils/processor');
 
 export function routes(app) {
   app.post('/wit', rules(), validate, async (req, res) => {
