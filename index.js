@@ -5,7 +5,9 @@ const basicAuth = require('express-basic-auth');
 const helmet = require('helmet');
 
 const { log } = require('./logger');
-const { routes } = require('./routes');
+const { validate } = require('./middleware/validate');
+const { rules } = require('./middleware/validate');
+const { processQuery } = require('./utils/processor');
 
 dotenv.config();
 
@@ -23,22 +25,24 @@ app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  basicAuth({ users: { admin: process.env.CLIENT_KEY }, unauthorizedResponse: { error: 'Missing Headers' } }),
-  (req, res, next) => {
-    next();
-  },
-);
+app.use(basicAuth({ users: { admin: process.env.CLIENT_KEY } }), (req, res, next) => {
+  next();
+});
 app.use(helmet());
 
-try {
-  app.listen(process.env.PORT || 3205, () => {
-    log.info(`Successfully connected to: http://localhost:${process.env.PORT || 3205}`);
-
-    routes(app);
-  });
-} catch (error) {
-  log.error(`Error occurred: ${error.message}`);
-}
+app.post('/wit', rules(), validate, async (req, res) => {
+  try {
+    const response = await processQuery(req.query.search);
+    if (response !== undefined) {
+      const { data } = response;
+      const { results } = data;
+      return res.status(200).send(results);
+    }
+    res.status(400).send('Undefined response');
+    throw new Error('Response is undefined');
+  } catch (error) {
+    log.error(error.message);
+  }
+});
 
 module.exports = app;
