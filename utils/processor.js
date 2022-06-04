@@ -5,6 +5,8 @@ const { search } = require('./search');
 
 const processQuery = async (query) => {
   log.info('Starting processing...');
+  log.info(query);
+  log.info(encodeURI(query));
   try {
     const res = await axios.get(`https://api.wit.ai/message?v=20210705&q=${encodeURI(query)}`, {
       headers: {

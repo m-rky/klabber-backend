@@ -32,7 +32,7 @@ app.use(helmet());
 
 app.post('/wit', rules(), validate, async (req, res) => {
   try {
-    const response = await processQuery(req.query.search);
+    const response = await processQuery(req.query.search.replace(/&#x27;/u, ''));
     if (response !== undefined) {
       const { data } = response;
       const { results } = data;
@@ -44,5 +44,13 @@ app.post('/wit', rules(), validate, async (req, res) => {
     log.error(error.message);
   }
 });
+
+// try {
+//   app.listen(process.env.PORT || 3205, () => {
+//     log.info(`Successfully connected to: http://localhost:${process.env.PORT || 3205}`);
+//   });
+// } catch (error) {
+//   log.error(`Error occurred: ${error.message}`);
+// }
 
 module.exports = app;
