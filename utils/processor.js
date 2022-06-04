@@ -1,28 +1,9 @@
-import axios, { AxiosResponse } from 'axios';
-
 import { log } from '../logger';
 import { search } from './search';
 
-export type ExportedObject = {
-  id: string;
-  name: string;
-  role: string;
-  start: number;
-  end: number;
-  body: string;
-  confidence: number;
-  entities: [];
-  value: string;
-  type: string;
-};
+const axios = require('axios');
 
-export const processQuery = async (query: string): Promise<AxiosResponse> => {
-  // Steps of things that have to happen here
-  // 1. handle bad requests ("what is the weather" || "whadn aoihioab apsnadndan28bsa") DONE
-  // 2. process the remaining requests DONE
-  //  2.A  get wit values from the sentiment DONE
-  //  2.B  use the values to produce a return value to search the games database DONE
-  // 3. Hit up search with values
+export const processQuery = async (query) => {
   log.info('Starting processing...');
   try {
     const res = await axios.get(`https://api.wit.ai/message?v=20210705&q=${encodeURI(query)}`, {
@@ -37,8 +18,8 @@ export const processQuery = async (query: string): Promise<AxiosResponse> => {
       const { intents, entities } = data;
 
       if (intents[0]?.name === 'find_games' && intents[0]?.confidence >= 0.5) {
-        const finalized: ExportedObject[] = [];
-        for (const [key, value] of Object.entries(entities)) {
+        const finalized = [];
+        for (const [key] of Object.entries(entities)) {
           switch (key) {
             case 'aspect_of_game:aspect_of_game':
               finalized.push(entities[key]);
@@ -92,6 +73,6 @@ export const processQuery = async (query: string): Promise<AxiosResponse> => {
 
     throw new Error(`Question didn't make sense`);
   } catch (error) {
-    log.error(`From within processQuery: ${error.message as string}`);
+    log.error(`From within processQuery: ${error.message}`);
   }
 };

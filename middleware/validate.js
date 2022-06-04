@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
-import { query, ValidationChain, validationResult } from 'express-validator';
-
 import { log } from '../logger';
 
-export const rules = (): ValidationChain[] => {
+const query = require('express-validator');
+const validationResult = require('express-validator');
+
+export const rules = () => {
   return [
     query('search')
       .notEmpty()
@@ -15,7 +15,7 @@ export const rules = (): ValidationChain[] => {
   ];
 };
 
-export const validate = (req: Request, res: Response, next: NextFunction): Response => {
+export const validate = (req, res, next) => {
   log.info('Started validation');
 
   const errors = validationResult(req);
