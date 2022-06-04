@@ -1,7 +1,7 @@
-const query = require('express-validator');
-const validationResult = require('express-validator');
+const { query } = require('express-validator');
+const { validationResult } = require('express-validator');
 
-const log = require('../logger');
+const { log } = require('../logger');
 
 const rules = () => {
   return [
@@ -31,4 +31,5 @@ const validate = (req, res, next) => {
   return res.status(422).json({ errors: extractedErrors });
 };
 
-module.exports = { rules, validate };
+exports.rules = rules;
+exports.validate = validate;

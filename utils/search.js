@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const log = require('../logger');
+const { log } = require('../logger');
 
 const bodyExtractor = (body) => {
   const arrayOfStrings = body.split(' ');
@@ -109,4 +109,4 @@ async function search(finalizedObject) {
   }
 }
 
-module.exports = search;
+exports.search = search;

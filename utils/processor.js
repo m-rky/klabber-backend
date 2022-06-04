@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const log = require('../logger');
-const search = require('./search');
+const { log } = require('../logger');
+const { search } = require('./search');
 
 const processQuery = async (query) => {
   log.info('Starting processing...');
@@ -77,4 +77,4 @@ const processQuery = async (query) => {
   }
 };
 
-module.exports = processQuery;
+exports.processQuery = processQuery;

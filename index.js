@@ -4,8 +4,8 @@ const express = require('express');
 const basicAuth = require('express-basic-auth');
 const helmet = require('helmet');
 
-const log = require('./logger');
-const routes = require('./routes');
+const { log } = require('./logger');
+const { routes } = require('./routes');
 
 dotenv.config();
 

@@ -9,4 +9,4 @@ const log = logger({
   timestamp: () => `,"time":"${dayjs().format()}"`,
 });
 
-module.exports = log;
+exports.log = log;

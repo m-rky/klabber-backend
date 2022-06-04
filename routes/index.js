@@ -1,7 +1,7 @@
-const log = require('../logger');
-const rules = require('../middleware/validate');
-const validate = require('../middleware/validate');
-const processQuery = require('../utils/processor');
+const { log } = require('../logger');
+const { rules } = require('../middleware/validate');
+const { validate } = require('../middleware/validate');
+const { processQuery } = require('../utils/processor');
 
 function routes(app) {
   app.post('/wit', rules(), validate, async (req, res) => {
@@ -20,4 +20,4 @@ function routes(app) {
   });
 }
 
-module.exports = routes;
+exports.routes = routes;
