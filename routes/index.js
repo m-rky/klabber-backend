@@ -3,7 +3,7 @@ const rules = require('../middleware/validate');
 const validate = require('../middleware/validate');
 const processQuery = require('../utils/processor');
 
-export function routes(app) {
+function routes(app) {
   app.post('/wit', rules(), validate, async (req, res) => {
     try {
       const response = await processQuery(req.query.search);
@@ -19,3 +19,5 @@ export function routes(app) {
     }
   });
 }
+
+module.exports = routes;

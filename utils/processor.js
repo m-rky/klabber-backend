@@ -3,7 +3,7 @@ const axios = require('axios');
 const log = require('../logger');
 const search = require('./search');
 
-export const processQuery = async (query) => {
+const processQuery = async (query) => {
   log.info('Starting processing...');
   try {
     const res = await axios.get(`https://api.wit.ai/message?v=20210705&q=${encodeURI(query)}`, {
@@ -76,3 +76,5 @@ export const processQuery = async (query) => {
     log.error(`From within processQuery: ${error.message}`);
   }
 };
+
+module.exports = processQuery;

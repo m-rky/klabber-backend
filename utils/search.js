@@ -76,7 +76,7 @@ const stringConstructor = (role, value) => {
   return items;
 };
 
-export async function search(finalizedObject) {
+async function search(finalizedObject) {
   log.info('Starting search...');
   const baseUrl = `https://api.rawg.io/api/games?key=${process.env.RAWG_KEY}&`;
 
@@ -108,3 +108,5 @@ export async function search(finalizedObject) {
     log.error(error.message);
   }
 }
+
+module.exports = search;

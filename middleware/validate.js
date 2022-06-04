@@ -3,7 +3,7 @@ const validationResult = require('express-validator');
 
 const log = require('../logger');
 
-export const rules = () => {
+const rules = () => {
   return [
     query('search')
       .notEmpty()
@@ -15,7 +15,7 @@ export const rules = () => {
   ];
 };
 
-export const validate = (req, res, next) => {
+const validate = (req, res, next) => {
   log.info('Started validation');
 
   const errors = validationResult(req);
@@ -30,3 +30,5 @@ export const validate = (req, res, next) => {
   log.info(errors);
   return res.status(422).json({ errors: extractedErrors });
 };
+
+module.exports = { rules, validate };

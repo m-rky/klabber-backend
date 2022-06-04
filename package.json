@@ -8,7 +8,7 @@
     "start": "node dist/index.js",
     "postinstall": "tsc",
     "dev": "node ./index.ts",
-    "publish": "deta deploy"
+    "deploy": "deta deploy"
   },
   "engines": {
     "node": "14.x"
