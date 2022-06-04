@@ -7,7 +7,7 @@ const rules = () => {
   return [
     query('search')
       .notEmpty()
-      .isAlphanumeric('en-US', { ignore: ` -?` })
+      .isAlphanumeric('en-US', { ignore: `'-?` })
       .isLength({ min: 8 })
       .isString()
       .trim()
