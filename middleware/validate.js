@@ -4,15 +4,7 @@ const { validationResult } = require('express-validator');
 const { log } = require('../logger');
 
 const rules = () => {
-  return [
-    query('search')
-      .notEmpty()
-      .isAlphanumeric('en-US', { ignore: `'-?` })
-      .isLength({ min: 8 })
-      .isString()
-      .trim()
-      .escape(),
-  ];
+  return [query('search').notEmpty().isLength({ min: 8 }).isString().trim().escape()];
 };
 
 const validate = (req, res, next) => {
