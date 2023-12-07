@@ -17,7 +17,7 @@
     "eslint-config-galex": "^4.1.1"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.6.0",
     "cors": "^2.8.5",
     "dayjs": "^1.10.6",
     "dotenv": "^16.0.0",
